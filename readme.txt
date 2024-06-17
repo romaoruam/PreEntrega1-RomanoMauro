@@ -1,2 +1,2 @@
-Primer pre-entrega para curso Javscript de Coderhouse -
+Primer pre-entrega para curso Javascript de Coderhouse -
 Romano Mauro
