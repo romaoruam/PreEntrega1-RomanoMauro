@@ -1,43 +1,52 @@
-// Valor remera en $(Pesos Argentinos)
+// Valor remera en Pesos Argentinos
 const precioRemera = 6500;
 
-// Solicito el ingreso de cantidad de remera de cada tipo
-let cantidadRemera1 = parseInt(prompt("Ingrese la cantidad de Remera 1 que desea comprar:"));
-let cantidadRemera2 = parseInt(prompt("Ingrese la cantidad de Remera 2 que desea comprar:"));
-let cantidadRemera3 = parseInt(prompt("Ingrese la cantidad de Remera 3 que desea comprar:"));
+// Solicitar nombre y apellido
+let nombreUsuario = prompt("Ingrese su nombre: ");
+let apellidoUsuario = prompt("Ingrese su apellido: ");
 
-// Validamos que la informacion sea numeros y no negativos
-if (isNaN(cantidadRemera1)  || cantidadRemera1 < 0 ||
-    isNaN(cantidadRemera2)  || cantidadRemera2 < 0 ||
-    isNaN(cantidadRemera3)  || cantidadRemera3 < 0) {
-  if (isNaN(cantidadRemera1)) {
-    console.error("Error: La cantidad de Remera 1 debe ser un número válido.");
-  } else if (cantidadRemera1 < 0) {
-    console.error("Error: La cantidad de Remera 1 no puede ser negativa.");
-  } 
+// Generar saludo
+let saludo = `¡Hola ${nombreUsuario} ${apellidoUsuario}! Bienvenido a nuestra tienda.`;
+console.log(saludo);
 
-  if (isNaN(cantidadRemera2)) {
-    console.error("Error: La cantidad de Remera 2 debe ser un número válido.");
-  } else if (cantidadRemera2 < 0) {
-    console.error("Error: La cantidad de Remera 2 no puede ser negativa.");
-  }
+// Lista de productos
+const productos = ["Remera 1", "Remera 2", "Remera 3"];
 
-  if (isNaN(cantidadRemera3)) {
-    console.error("Error: La cantidad de Remera 3 debe ser un número válido.");
-  } else if (cantidadRemera3 < 0) {
-    console.error("Error: La cantidad de Remera 3 no puede ser negativa.");
-  }
+// Mostrar opciones de producto
+console.log("\nOpciones de productos:");
+for (let i = 0; i < productos.length; i++) {
+  console.log(`${i + 1}. ${productos[i]}`);
+}
+
+// Solicitar selección de producto
+let productoElegido = parseInt(prompt("Ingrese el número del producto que desea comprar: "));
+
+// Validar selección de producto
+if (isNaN(productoElegido) || productoElegido < 1 || productoElegido > productos.length) {
+  console.error("Error: El número de producto ingresado no es válido.");
 } else {
-  // Calculamos el total sin descuento
-  let totalSinDescuento = calcularTotal(cantidadRemera1, cantidadRemera2, cantidadRemera3);
-  console.log(`Total sin descuento: ${totalSinDescuento} $(Pesos).`);
+  // Mostrar información del producto seleccionado
+  let productoSeleccionado = productos[productoElegido - 1];
+  console.log(`\nProducto seleccionado: ${productoSeleccionado}`);
 
-  // Aplicamos descuento del 10% si se compran 3 o + remeras
-  if (cantidadRemera1 + cantidadRemera2 + cantidadRemera3 >= 3) {
-    let totalConDescuento = aplicarDescuento(totalSinDescuento);
-    console.log(`Total con descuento del 10%: ${totalConDescuento} $(Pesos).`);
+  // Solicitar cantidad del producto seleccionado
+  let cantidadProducto = parseInt(prompt(`Ingrese la cantidad de ${productoSeleccionado} que desea comprar: `));
+
+  // Validar cantidad del producto seleccionado
+  if (isNaN(cantidadProducto) || cantidadProducto < 1) {
+    console.error("Error: La cantidad ingresada no es válida.");
   } else {
-    console.log("No se aplica descuento.");
+    // Calcular total sin descuento
+    let totalSinDescuento = cantidadProducto * precioRemera;
+    console.log(`Total sin descuento: ${totalSinDescuento} pesos argentinos.`);
+
+    // Aplicar descuento del 10% si se compran 3 o más remeras
+    if (cantidadProducto >= 3) {
+      let totalConDescuento = aplicarDescuento(totalSinDescuento);
+      console.log(`Total con descuento del 10%: ${totalConDescuento} pesos argentinos.`);
+    } else {
+      console.log("No se aplica descuento.");
+    }
   }
 }
 
